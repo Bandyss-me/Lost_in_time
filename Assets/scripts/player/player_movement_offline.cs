@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 
 public class player_movement_offline : MonoBehaviour
 {
-    CharacterController playerController;
+    private CharacterController playerController;
+    private Animator _animator;
 
     [Header("Movement")]
     [SerializeField]
@@ -50,6 +51,7 @@ public class player_movement_offline : MonoBehaviour
     Vector3 _prevMovementV;
 
     void Awake(){
+        _animator = GetComponent<Animator>();
         playerController=GetComponent<CharacterController>();
         move_input = inputActionAsset.FindAction("Move");
         look_input = inputActionAsset.FindAction("Look");
@@ -57,19 +59,6 @@ public class player_movement_offline : MonoBehaviour
         sprint_input = inputActionAsset.FindAction("Sprint");
         inputActionAsset.Enable();
     }
-
-    /*public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-        playerCamera.gameObject.SetActive(IsOwner);
-        if (!IsOwner)
-        {
-            enabled = false;
-            return;
-        }
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible=false;
-    }*/
 
     void Start()
     {
@@ -86,9 +75,9 @@ public class player_movement_offline : MonoBehaviour
         RotateWithMouse();
     }
 
-    void GroundCheck(){
-        _isGrounded = Physics.SphereCast(transform.position, 0.5f, Vector3.down, out RaycastHit hit, 0.75f,1,QueryTriggerInteraction.Ignore);
-        _isInAir = !Physics.Raycast(transform.position-transform.up*1f,Vector3.down,1f);
+    void GroundCheck()
+    {
+        _isGrounded = playerController.isGrounded;
     }
 
     void Newton_is_watching_you(){
@@ -105,6 +94,16 @@ public class player_movement_offline : MonoBehaviour
     void Move(){
         Vector2 input=move_input.ReadValue<Vector2>().normalized;
         float tspeed=sprint_input.IsPressed()?run_speed:walk_speed;
+        if (_isGrounded)
+        {
+            if (input != Vector2.zero)
+            {
+                if (sprint_input.IsPressed())
+                    _animator.SetInteger("state", 2);
+                else _animator.SetInteger("state", 1);
+            }
+            else _animator.SetInteger("state", 0);
+        }
         Vector3 dir = transform.right*input.x + transform.forward*input.y;
         _movementV.x=dir.x*tspeed;
         _movementV.z=dir.z*tspeed;
@@ -129,9 +128,15 @@ public class player_movement_offline : MonoBehaviour
     }
 
     void Jump(){
+        if(_isGrounded && !_hasLanded)
+        {
+            _animator.ResetTrigger("jump");
+            _hasLanded=true;
+        }
         bool jumpHeld = jump_input.IsPressed();
         if (jumpHeld && _hasLanded)
         {
+            _animator.SetTrigger("jump");
             verMov=0f;
             verMov+=jumpForce;
             _heigthTimer=0f;
@@ -149,10 +154,6 @@ public class player_movement_offline : MonoBehaviour
             _hasJumped=false;
             if(!_hasGravity)
                 _hasGravity=true;
-        }
-        if(_isGrounded && !_hasLanded)
-        {
-            _hasLanded=true;
         }
     }
 }
