@@ -10,18 +10,21 @@ public class UIs : MonoBehaviour
     [SerializeField] private Button rowPrefab;
     public Button saveButton;
     public Button closeButton;
-    public TMP_Text textBox;
-    public GameObject pannel;
+    public Button loadButton;
+    public TMP_InputField textBox;
+    public GameObject panel;
+    
+    public bool isOpen => textBox.isFocused;
     
     private readonly List<Button> m_rows = new ();
 
     private void Awake()
     {
-        pannel.SetActive(false);
+        panel.SetActive(false);
         
         closeButton.onClick.AddListener(() =>
         {
-            pannel.SetActive(false);
+            panel.SetActive(false);
         });
     }
 

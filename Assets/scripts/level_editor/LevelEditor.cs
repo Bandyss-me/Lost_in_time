@@ -80,6 +80,16 @@ public class LevelEditor : MonoBehaviour
         public uint objectID;
     };
 
+    public void addToObj(LevelEditorObject obj)
+    {
+        m_objects.Add(obj);
+    }
+
+    public GameObject[] getPrefabs()
+    {
+        return m_objectPrefabs;
+    }
+
     public float slowMult = 2;
     public float moveSpeed = .5f;
     public float objMoveSpeed = .2f;
@@ -104,7 +114,16 @@ public class LevelEditor : MonoBehaviour
         {
             m_LevelSavingLoadingEditor.saveTo(m_UIs.textBox.text);
         });
-            
+           
+        m_UIs.loadButton.onClick.AddListener(() =>
+        {
+            try
+            {
+                m_LevelSavingLoadingEditor.loadFrom(m_UIs.textBox.text);
+            }
+            catch (Exception e) { Debug.Log(e.Message); }
+        });
+        
         m_LevelSavingLoadingEditor = m_levelSavingObj.GetComponent<LevelSavingLoadingEditor>();
         m_objPrefabSelector.SetActive(false);
         m_selectedPrefabID = 0;
@@ -139,6 +158,9 @@ public class LevelEditor : MonoBehaviour
 
     bool isPressed(KeyType type, bool held = false)
     {
+        if (m_UIs.isOpen)
+            return false;
+        
         if (held == false)
             return Input.GetKeyDown(keyBindings[type]);
         return Input.GetKey(keyBindings[type]);
@@ -329,7 +351,7 @@ public class LevelEditor : MonoBehaviour
 
         if (isPressed(KeyType.SAVE_LEVEL))
         {
-            m_UIs.pannel.SetActive(true);
+            m_UIs.panel.SetActive(true);
         }
 
         if (isPressed(KeyType.SLOW_DOWN_TRANSFORM))
@@ -339,7 +361,7 @@ public class LevelEditor : MonoBehaviour
             objRotateSpeed /= slowMult;
         }
 
-        if (Input.GetKeyUp(keyBindings[KeyType.SLOW_DOWN_TRANSFORM]))
+        if (!m_UIs.isOpen && Input.GetKeyUp(keyBindings[KeyType.SLOW_DOWN_TRANSFORM]))
         {
             objMoveSpeed *= slowMult;
             objScaleSpeed *= slowMult;

@@ -13,6 +13,30 @@ public class LevelSavingLoadingEditor : MonoBehaviour
         m_levelEditor = m_levelEditorObj.GetComponent<LevelEditor>();
     }
 
+    public void loadFrom(string fileName)
+    {
+        string json = File.ReadAllText(Path.Combine(Application.persistentDataPath, "levels", fileName + ".json"));
+        Level level = JsonUtility.FromJson<Level>(json);
+        
+        foreach (Level.Object obj in level.objects)
+        {
+            LevelEditor.LevelEditorObject levelObj = new LevelEditor.LevelEditorObject();
+
+            levelObj.objectID = obj.ID;
+
+            levelObj.gameObject = Instantiate(m_levelEditor.getPrefabs()[obj.ID]);
+
+            Func<Level.NewVec3, Vector3> toVec3 = vec3 => new Vector3(vec3.x, vec3.y, vec3.z);
+            Func<Level.NewQuaternion, Quaternion> toQuat = vec3 => new Quaternion(vec3.w, vec3.x, vec3.y, vec3.z);
+            
+            levelObj.gameObject.transform.position = toVec3(obj.position);
+            levelObj.gameObject.transform.localScale = toVec3(obj.scale);
+            levelObj.gameObject.transform.rotation = toQuat(obj.rotation);
+            
+            m_levelEditor.addToObj(levelObj);
+        }
+    }
+    
     public void saveTo(string fileName)
     {
         Level level = new Level();
