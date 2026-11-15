@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class LevelEditor : MonoBehaviour
 {
@@ -39,7 +40,8 @@ public class LevelEditor : MonoBehaviour
         DELETE_OBJ,
         TOGGLE_OBJ_SELECTION,
         SAVE_LEVEL,
-        SLOW_DOWN_TRANSFORM
+        SLOW_DOWN_TRANSFORM,
+        BACK
     };
     
     public float maxDist = 30f;
@@ -72,6 +74,7 @@ public class LevelEditor : MonoBehaviour
         { KeyType.TOGGLE_OBJ_SELECTION, KeyCode.O},
         { KeyType.SAVE_LEVEL, KeyCode.U},
         { KeyType.SLOW_DOWN_TRANSFORM, KeyCode.LeftShift },
+        { KeyType.BACK, KeyCode.Backspace },
     };
 
     public struct LevelEditorObject
@@ -366,6 +369,12 @@ public class LevelEditor : MonoBehaviour
             objMoveSpeed *= slowMult;
             objScaleSpeed *= slowMult;
             objRotateSpeed *= slowMult;
+        }
+
+        if (isPressed(KeyType.BACK))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("LevelSelectorPage");
         }
     }
 }
