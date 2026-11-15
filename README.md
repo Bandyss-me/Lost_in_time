@@ -1,18 +1,18 @@
 # Lost in Time
 
-**Tema Hackathon:** Bounce back!
+**Tema:** Bounce back!
 
-**Gen:** Platformer 3D cu perspectivă FPV (First-Person View) și suport Multiplayer
+**Gen:** Platformer 3D
 
 **Scopul jocului:** Să ajungi acasă.
 
-**Setting & Locație:** Japonia (Japan) → Pădure (Forest)
+**Setting & Locație:** Padure din Japonia
 
-**Stil vizual și atmosferă:** Estetică *„Lost in time”* (pierdut în timp), cu elemente vizuale și efecte de tip *glitchy*.
+**Stil vizual și atmosferă:** Estetică *„Lost in time”*.
 
 ## Prezentare Generală
 
-**Lost in Time** este un platformer 3D first-person multiplayer plasat într-o pădure japoneză afectată de bucle temporale și spațiale. Perspectiva FPV pune accent pe imersiune și pe observarea atentă a mediului, iar modul multiplayer permite explorarea și rezolvarea provocărilor împreună cu alți jucători.
+**Lost in Time** este un platformer 3D într-o pădure japoneză afectată de bucle temporale și spațiale.
 
 ## Mecanica Principală și Designul Nivelurilor (Gameplay Loop)
 
@@ -34,17 +34,13 @@
 
 * **Modele 3D:**
 
-  * **Model 3D Casă:** Destinația finală a jucătorului (*„acasă”*).
-
-  * **Model 3D Medan:** Element narativ și vizual în joc.
-
 * **Branding & Materiale Vizuale:**
 
   * Logo-ul oficial **Lost in Time**.
 
   * Afișul de prezentare pentru hackathon.
 
-  * Website de prezentare (descriere, poveste, detalii joc și echipă).
+  * Website de prezentare.
 
 ## Împărțirea Sarcinilor pe Echipă
 
@@ -68,12 +64,5 @@
 
 * **Modelare 3D:**
 
-  * Model 3D casă (destinația finală — *„acasă”*).
-
-  * Model 3D medan (element narativ / vizual în joc).
-
 * **Branding și Materiale Vizuale:**
 
-  * Logo-ul oficial **Lost in Time**.
-
-  * Afișul de prezentare pentru hackathon.
