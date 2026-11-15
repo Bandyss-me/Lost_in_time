@@ -63,7 +63,7 @@ public class LobbyManager : MonoBehaviour
             allocation.Key,
             allocation.ConnectionData);
         NetworkManager.Singleton.StartHost();
-        NetworkManager.Singleton.SceneManager.LoadScene("demo2", UnityEngine.SceneManagement.LoadSceneMode.Single); 
+        NetworkManager.Singleton.SceneManager.LoadScene("SampleScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
     public async void JoinLobbyByCode()
@@ -81,30 +81,5 @@ public class LobbyManager : MonoBehaviour
             allocation.ConnectionData,
             allocation.HostConnectionData);
         NetworkManager.Singleton.StartClient();
-    }
-    
-    public async void StopSession()
-    {
-        try
-        {
-            if (currentLobby != null)
-            {
-                if (currentLobby.HostId == AuthenticationService.Instance.PlayerId)
-                    await LobbyService.Instance.DeleteLobbyAsync(currentLobby.Id);
-                else
-                    await LobbyService.Instance.RemovePlayerAsync(currentLobby.Id, AuthenticationService.Instance.PlayerId);
-            }
-        }
-        catch (LobbyServiceException e)
-        {
-            Debug.LogWarning(e);
-        }
-        currentLobby = null;
-        LobbyCode = null;
-        if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsListening)
-            NetworkManager.Singleton.Shutdown();
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }
