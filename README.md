@@ -42,7 +42,7 @@
 
   * Website de prezentare.
 
-## Împărțirea Sarcinilor pe Echipă
+## Planul ciungilor:
 
 ### Andy
 
