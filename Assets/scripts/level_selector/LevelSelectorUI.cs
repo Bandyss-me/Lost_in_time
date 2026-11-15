@@ -18,7 +18,7 @@ public class LevelSelectorUI : MonoBehaviour
     {
         openLevelEditor.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene("LevelEditor");
         });
         
         string dir = Path.Combine(Application.persistentDataPath, "custom_levels");
@@ -29,7 +29,8 @@ public class LevelSelectorUI : MonoBehaviour
         
         rebuild(names, indx =>
         {
-            Debug.Log(indx);
+            StaticLevelTransfer.levelName = names[(int)indx];
+            SceneManager.LoadScene("PlayLevel");
         });
     }
 

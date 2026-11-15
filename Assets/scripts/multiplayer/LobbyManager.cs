@@ -15,7 +15,7 @@ using TMPro;
 public class LobbyManager : MonoBehaviour
 {
     [SerializeField] string lobbyName = "Lobby";
-    [SerializeField] int maxPlayers = 4;
+    [SerializeField] int maxPlayers = 10;
     [SerializeField] private TMP_InputField joinCode;
     
     public static string LobbyCode;

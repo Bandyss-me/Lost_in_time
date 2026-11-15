@@ -27,7 +27,7 @@ public class LevelSavingLoadingEditor : MonoBehaviour
             levelObj.gameObject = Instantiate(m_levelEditor.getPrefabs()[obj.ID]);
 
             Func<Level.NewVec3, Vector3> toVec3 = vec3 => new Vector3(vec3.x, vec3.y, vec3.z);
-            Func<Level.NewQuaternion, Quaternion> toQuat = vec3 => new Quaternion(vec3.w, vec3.x, vec3.y, vec3.z);
+            Func<Level.NewQuaternion, Quaternion> toQuat = vec3 => new Quaternion(vec3.x, vec3.y, vec3.z, vec3.w);
             
             levelObj.gameObject.transform.position = toVec3(obj.position);
             levelObj.gameObject.transform.localScale = toVec3(obj.scale);
