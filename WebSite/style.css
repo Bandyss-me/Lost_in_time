@@ -330,6 +330,68 @@ body.menu-open {
   font-weight: 600;
 }
 
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  margin-top: .4rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .55em;
+  padding: .85em 1.5em;
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  transition: background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+
+.btn--primary {
+  background: var(--verm);
+  color: var(--paper);
+}
+
+.btn--primary:hover {
+  background: #d9512f;
+}
+
+.btn--ghost {
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+
+.btn--ghost:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-top: 1.2rem;
+}
+
+.footer-links a {
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--amber);
+  transition: color .25s;
+}
+
+.footer-links a:hover {
+  color: var(--verm);
+}
+
 .section {
   position: relative;
   padding-block: clamp(5rem, 12vh, 8.5rem);
