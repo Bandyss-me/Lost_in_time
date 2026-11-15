@@ -14,7 +14,7 @@
 
 **Lost in Time** este un platformer 3D într-o pădure japoneză afectată de bucle temporale și spațiale.
 
-## Mecanica Principală și Designul Nivelurilor (Gameplay Loop)
+## Mecanica Principală și Designul Nivelurilor
 
 1. **Ruta normală și blocajul (`Loop back`):**
 
