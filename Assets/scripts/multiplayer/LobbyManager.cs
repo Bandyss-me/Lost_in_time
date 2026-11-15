@@ -103,6 +103,8 @@ public class LobbyManager : MonoBehaviour
         LobbyCode = null;
         if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsListening)
             NetworkManager.Singleton.Shutdown();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }
