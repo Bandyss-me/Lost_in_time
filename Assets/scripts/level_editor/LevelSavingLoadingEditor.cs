@@ -15,7 +15,7 @@ public class LevelSavingLoadingEditor : MonoBehaviour
 
     public void loadFrom(string fileName)
     {
-        string json = File.ReadAllText(Path.Combine(Application.persistentDataPath, "levels", fileName + ".json"));
+        string json = File.ReadAllText(Path.Combine(Application.persistentDataPath, "custom_levels", fileName + ".json"));
         Level level = JsonUtility.FromJson<Level>(json);
         
         foreach (Level.Object obj in level.objects)
@@ -27,7 +27,7 @@ public class LevelSavingLoadingEditor : MonoBehaviour
             levelObj.gameObject = Instantiate(m_levelEditor.getPrefabs()[obj.ID]);
 
             Func<Level.NewVec3, Vector3> toVec3 = vec3 => new Vector3(vec3.x, vec3.y, vec3.z);
-            Func<Level.NewQuaternion, Quaternion> toQuat = vec3 => new Quaternion(vec3.w, vec3.x, vec3.y, vec3.z);
+            Func<Level.NewQuaternion, Quaternion> toQuat = vec3 => new Quaternion(vec3.x, vec3.y, vec3.z, vec3.w);
             
             levelObj.gameObject.transform.position = toVec3(obj.position);
             levelObj.gameObject.transform.localScale = toVec3(obj.scale);
@@ -64,7 +64,7 @@ public class LevelSavingLoadingEditor : MonoBehaviour
 
         string json = JsonUtility.ToJson(level, true);
         
-        string dir = Path.Combine(Application.persistentDataPath, "levels");
+        string dir = Path.Combine(Application.persistentDataPath, "custom_levels");
         Directory.CreateDirectory(dir);
         File.WriteAllText(Path.Combine(dir, fileName + ".json"), json);
     }
