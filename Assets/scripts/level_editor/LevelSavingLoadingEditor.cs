@@ -15,7 +15,7 @@ public class LevelSavingLoadingEditor : MonoBehaviour
 
     public void loadFrom(string fileName)
     {
-        string json = File.ReadAllText(Path.Combine(Application.persistentDataPath, "levels", fileName + ".json"));
+        string json = File.ReadAllText(Path.Combine(Application.persistentDataPath, "custom_levels", fileName + ".json"));
         Level level = JsonUtility.FromJson<Level>(json);
         
         foreach (Level.Object obj in level.objects)
@@ -64,7 +64,7 @@ public class LevelSavingLoadingEditor : MonoBehaviour
 
         string json = JsonUtility.ToJson(level, true);
         
-        string dir = Path.Combine(Application.persistentDataPath, "levels");
+        string dir = Path.Combine(Application.persistentDataPath, "custom_levels");
         Directory.CreateDirectory(dir);
         File.WriteAllText(Path.Combine(dir, fileName + ".json"), json);
     }
